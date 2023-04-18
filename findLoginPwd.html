@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <style>
+        body {
+            background-image: url(images/pwd.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+
+        .container-findpwd {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -125px;
+            margin-left: -200px;
+            width: 400px;
+            height: 250px;
+            border: #c0c0c0 1px solid;
+
+            border-radius: 15px;
+        }
+
+        form div {
+            margin: 20px 50px;
+        }
+
+        p {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+
+        input {
+            width: 100px;
+
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+</body>
+<div class="container-findpwd">
+    <p>找回密码</p>
+    <form action="javascript:;">
+        <div>请输入你绑定的手机号：<input type="text" name="bindMobile" id="phone"></div>
+        <div>请输入你的新密码：<input type="password" name="newLoginPwd"></div>
+        <div>请输入验证码: <input type="text" name="verifyType" style="width:50px;"><button id="verifyCode">获取验证码</button>
+        </div>
+        <button type="submit" style="margin-left: 50px;">修改密码</button>
+    </form>
+
+</div>
+<script src="js/findLoginPwd.js"></script>
+
+</html>

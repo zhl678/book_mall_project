@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/search.css">
+    <script src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="#">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="javascript:;" id="car">我的购物车</a>
+    </header>
+
+    <div class="w title"><a href="index.html">首页</a></div>
+    <div class="container-goods">
+        <ul>
+        </ul>
+    </div>
+    <footer><img src="images/footer.PNG" alt="" style="width: 100%;margin-top: 80px;"></footer>
+</body>
+<script src="js/comom.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $.ajax({
+        type: 'get', url: 'http://localhost:9321/mall/book/open/search', data: { bookName: localStorage.getItem('search_bookName'), pageNum: '1', pageSize: '10' }, success: function (res) {
+            $('.title').append(' > "' + localStorage.getItem('search_bookName') + '"的搜索结果');
+            if (res.result.page.list.length == 0) {
+                $('.container-goods ul').css('display', 'none');
+                $('.container-goods').append('<p id=' + 'no-result' + '>无相关书籍</p>');
+            } else {
+                $.each(res.result.page.list, function (i, ele) {
+                    var bookimg = res.result.page.list[i].bookIconUrl;
+                    var boolname = res.result.page.list[i].bookName;
+                    var bookprice = res.result.page.list[i].currPrice;
+                    var press = res.result.page.list[i].press;
+                    var bookId = res.result.page.list[i].bookId;
+                    $('.container-goods ul').append('<li id="' + bookId + '"> <a href = "book_info.html" target="_blank"><div class ="goods-img"><img src = "' + bookimg + '" alt=""><div></a><div class="bookprice">￥' + bookprice + '</div><em><a href ="book_info.html" target="_blank">' + boolname + '</a></em> <div class="press">' + press + '</div> <span class = "book-collect"><i class = "iconfont icon-xiai collect"></i>收藏</span> <span class = "iconfont icon-gouwuche add-car">加入购物车</span> </li>');
+                })
+            }
+
+        }
+    })
+
+
+    $('#car').on('click', function () {
+        if (localStorage.getItem('token')) {
+            window.open('car.html');
+        } else {
+            window.location.href = 'login.html';
+        }
+    })
+
+    $('.container-goods ul').on('click', 'li', function () {
+        var list_id = $(this).attr('id');
+        localStorage.setItem('bookId', list_id);
+
+    })
+    // 添加购物车
+    $('.container-goods ul').on('click', '.add-car', function () {
+        var bookid = $(this).parent().parent().parent().attr('id');
+        localStorage.setItem('bookId', bookid);
+        $.ajax({
+            headers: { token: localStorage.getItem('token') },
+            type: 'post',
+            url: 'http://localhost:9321/mall/shoppingCart/add',
+            data: { bookId: localStorage.getItem('bookId'), bookNum: '1' },
+
+        })
+    })
+
+
+</script>
+
+</html>

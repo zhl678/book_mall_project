@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/index.style.css">
+    <script src="js/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="personal.html">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="personal.html">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="javascript:;" id="car">我的购物车</a>
+
+
+
+    </header>
+    <div class="banner w">
+        <aside>
+            <div class="category">图书分类</div>
+            <ul>
+
+            </ul>
+
+        </aside>
+        <div id="target">
+            <div>
+                <div><img src=""></div>
+                <div><img src=""></div>
+                <div><img src=""></div>
+                <div><img src=""></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 排行榜 -->
+    <div class="rank">
+        <p class="rank-title">新书排行榜</p>
+        <ol>
+            <li>
+
+            </li>
+            <li>
+
+            </li>
+            <li>
+
+            </li>
+            <li>
+
+            </li>
+            <li>
+
+            </li>
+        </ol>
+    </div>
+</body>
+<footer><img src="images/footer.PNG" alt="" style="width: 100%;margin-top: 80px;"></footer>
+
+<script>
+    $(function () {
+        // 购物车
+        $('#car').on('click', function () {
+            if (localStorage.getItem('token')) {
+                window.open('car.html');
+            } else {
+                window.location.href = 'login.html';
+            }
+        })
+
+        // 类别
+        $.ajax({
+            type: 'get', url: 'http://localhost:9321/mall/index/open/allCategory', success: function (res) {
+                $.each(res.result.page, function (i, ele) {
+
+                    $('aside ul').append('<li id="' + ele.categoryId + '">' + '<div></div>' + ele.categoryName + '</li>');
+
+
+                })
+                $.each(res.result.page, function (j, k) {
+                    $.each(k.childCategory, function (n, m) {
+
+                        $($('aside ul div')[j]).append('<a href="javascript:;" id="' + m.categoryId + '">' + m.categoryName + '</a>');
+                    })
+
+
+
+                })
+
+                $('aside ul').on("mouseover", 'li', function () {
+                    $(this).children('div').css('display', 'block')
+                })
+                $('aside ul').on('mouseout', 'li', function () {
+                    $(this).children('div').css('display', 'none')
+                })
+
+            }
+        })
+        // 搜索
+        $('#form_search').submit(function () {
+
+            var params = $(this).serializeArray();
+            localStorage.setItem('search_bookName', params[0].value);
+            window.open('search.html');
+        })
+
+        // 轮播图
+
+
+        $("#target").HappyImage({
+            effect: "slide",
+            autoplay: 4000
+        });
+        $.ajax({
+            type: 'get', url: 'http://localhost:9321/mall/index/open/banner', success: function (res) {
+                $.each(res.result.page, function (i, ele) {
+                    $('#target img')[i].setAttribute('src', ele.iconUrl);
+                })
+
+            }
+        })
+
+    })
+    // 登录状态
+    function state() {
+        if (localStorage.getItem('userName')) {
+            $('.nav dl dt').text('Hi,' + localStorage.getItem('userName'));
+            $('#login_li').css('visibility', 'hidden');
+            $('.nav dl').css('visibility', 'visible');
+        } else {
+            $('#login_li').css('visibility', 'visible');
+            $('.nav dl').css('visibility', 'hidden');
+        }
+    }
+    state();
+    $('#signout').on('click', function () {
+        confirm('确定退出登录？');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('token');
+        location.reload();
+    })
+    // 类别点击事件
+    $('aside ul').on('click', 'a', function () {
+        localStorage.setItem('categoryId', $(this).attr('id'));
+        window.open('category.html');
+    })
+
+    // 排行榜
+    $.ajax({
+        type: 'get',
+        url: 'http://localhost:9321/mall/book/open/newBookRank',
+        data: {
+            pageNum: '1',
+            pageSize: '5'
+        },
+        success: function (res) {
+            console.log(res);
+            $.each(res.result.page.list, function (i, ele) {
+                var rank = ele.rank;
+                $('.rank li').each(function (j, elee) {
+                    console.log(elee.innerHTML);
+                    if (rank == j + 1) {
+                        elee.innerHTML = '<div class="rank-img"><img src="' + ele.bookIconUrl + '"alt=""></div><div class="rank2"><p>' + ele.bookName + '</p></div>'
+                    }
+                })
+            })
+        }
+
+
+    })
+
+
+</script>
+<script script src="js/HappyImage.min.js"></script>
+<script src="js/index.js"></script>
+
+</html>

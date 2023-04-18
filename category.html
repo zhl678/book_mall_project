@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jquery.pagination.css" />
+    <link rel="stylesheet" href="css/page.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.pagination.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="#">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="#" id="car">我的购物车</a>
+    </header>
+
+
+    <div class="container-goods">
+        <a href="index.html" class="shouye">首页</a>
+        <i class="iconfont icon-xiangyoujiantou"></i><em id="category2"></em>
+        <ul>
+        </ul>
+    </div>
+    <div class="container-tip addCar_tip">
+        添加成功!
+    </div>
+    <div class="container-tip collect_tip">
+        收藏成功!
+    </div>
+
+    <div class="box">
+        <div id="pagination1" class="fl page"></div>
+    </div>
+
+    <footer><img src="images/footer.PNG" alt="" style="width: 100%;"></footer>
+</body>
+
+
+<script src="js/index.js"></script>
+<script>
+    $('#car').on('click', function () {
+        if (localStorage.getItem('token')) {
+            window.open('car.html');
+        } else {
+            window.location.href = 'login.html';
+        }
+    })
+
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:9321/mall/book/open/categoryBook',
+            data: { categoryId: localStorage.getItem('categoryId'), pageNum: '1', pageSize: '12' },
+            success: function (res) {
+                $('#category2').text(res.result.page.list[0].categoryName);
+                $('title').html(res.result.page.list[0].categoryName);
+                var totalPage = res.result.page.pages;
+                $("#pagination1").pagination({
+                    currentPage: 1,
+                    totalPage: totalPage,
+                    callback: function (current) {
+                        var cur = current.toString();
+                        $.ajax({
+                            type: 'get',
+                            url: 'http://localhost:9321/mall/book/open/categoryBook',
+                            data: { categoryId: localStorage.getItem('categoryId'), pageNum: cur, pageSize: '12' },
+                            success: function (res) {
+                                $('.container-goods ul').empty();
+                                $.each(res.result.page.list, function (i, ele) {
+                                    var bookimg = res.result.page.list[i].bookIconUrl;
+                                    var boolname = res.result.page.list[i].bookName;
+                                    var bookprice = res.result.page.list[i].currPrice;
+                                    var press = res.result.page.list[i].press;
+                                    var bookId = res.result.page.list[i].bookId;
+                                    $('.container-goods ul').append('<li id="' + bookId + '"> <a href = "book_info.html" target="_blank"><div class ="goods-img"><img src = "' + bookimg + '" alt=""><div></a><div class="bookprice">￥' + bookprice + '</div><em><a href ="book_info.html" target="_blank">' + boolname + '</a></em> <div class="press">' + press + '</div> <span class = "book-collect"><i class = "iconfont icon-xiai collect"></i>收藏</span> <span class = "iconfont icon-gouwuche add-car">加入购物车</span> </li>');
+                                })
+
+
+                            }
+                        })
+                    }
+                })
+                $.each(res.result.page.list, function (i, ele) {
+                    var bookimg = res.result.page.list[i].bookIconUrl;
+                    var boolname = res.result.page.list[i].bookName;
+                    var bookprice = res.result.page.list[i].currPrice;
+                    var press = res.result.page.list[i].press;
+                    var bookId = res.result.page.list[i].bookId;
+                    $('.container-goods ul').append('<li id="' + bookId + '"> <a href = "book_info.html" target="_blank"><div class ="goods-img"><img src = "' + bookimg + '" alt=""><div></a><div class="bookprice">￥' + bookprice + '</div><em><a href ="book_info.html" target="_blank">' + boolname + '</a></em> <div class="press">' + press + '</div> <span class = "book-collect"><i class = "iconfont icon-xiai collect"></i>收藏</span> <span class = "iconfont icon-gouwuche add-car">加入购物车</span> </li>');
+                })
+
+
+            }
+        })
+
+
+
+
+
+        $('.container-goods ul').on('click', 'li', function () {
+            var list_id = $(this).attr('id');
+            localStorage.setItem('bookId', list_id);
+
+        })
+        // 添加购物车
+
+
+
+
+        $('.container-goods ul').on('click', '.add-car', function () {
+
+
+            var bookid = $(this).parent().parent().parent().attr('id');
+            localStorage.setItem('bookId', bookid);
+            $.ajax({
+                headers: { token: localStorage.getItem('token') },
+                type: 'post',
+                url: 'http://localhost:9321/mall/shoppingCart/add',
+                data: { bookId: localStorage.getItem('bookId'), bookNum: '1' },
+
+            })
+            $('.addCar_tip').show();
+            setTimeout(function () {
+                $('.addCar_tip').hide();
+            }, 800)
+        })
+        // 添加收藏
+        $('.container-goods ul').on('click', '.book-collect', function () {
+            $(this).children('.collect').css('color', 'red');
+            var bookid = $(this).parents('li').attr('id');
+            $.ajax({
+                headers: { token: localStorage.getItem('token') },
+                type: 'post',
+                url: 'http://localhost:9321/mall/book/collect',
+                data: { bookId: bookid }, success: function () {
+                    console.log('ok');
+                }
+
+            })
+            $('.collect_tip').show();
+            setTimeout(function () {
+                $('.collect_tip').hide();
+            }, 800)
+        })
+    })
+
+</script>
+<link rel="stylesheet" href="css/category.css">
+<script src="js/comom.js"></script>
+
+
+
+</html>

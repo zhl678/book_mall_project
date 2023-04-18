@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="BootStrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/admin.index.css">
+    <link rel="stylesheet" href="css/jquery.pagination.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.pagination.min.js"></script>
+    <script src="BootStrap/dist/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="container container-admin">
+        <div class="dropdown manage">
+            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">管理员
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a class="text-center" role="menuitem" tabindex="-1" href="#">退出登录</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="text-center active"><a href="#">轮播图管理</a></li>
+                    <li class="text-center"><a href="#">区域管理</a></li>
+                    <li class="text-center"><a href="#">书籍管理</a></li>
+                    <li class="text-center"><a href="#">类别管理</a></li>
+                    <li class="text-center"><a href="#">订单管理</a></li>
+                    <li class="text-center"><a href="#">修改密码</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <div class="item" style="display: block;">
+                    <table class="table table-bordered banner-list table-condensed table-hover">
+                        <caption>轮播图列表</caption>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>图片地址</th>
+                                <th>跳转链接</th>
+                                <th>上下架状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">轮播图编辑</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="javascript:;" id="banner-form1">
+                                            <div>图片地址：<input type="text" name="iconUrl"></div>
+                                            <div>跳转链接：<input type="text" name="jumpLinks"></div>
+                                            <div>上下架状态：<input type="radio" name="value" value="true">上架 <input
+                                                    type="radio" name="value" value="false">下架</div>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary editBanner">提交更改</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+
+                    </table>
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#myModal2">添加轮播图</button>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">轮播图添加</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="#" id="banner-form2">
+                                        <div>图片地址：<input type="text" name="iconUrl"></div>
+                                        <div>跳转链接：<input type="text" name="jumpLinks"></div>
+                                        <div>上下架状态：<input type="radio" name="value" value="true">上架 <input type="radio"
+                                                name="value" value="false">下架</div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary banner-add">确定添加</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="item areaItem">
+                    <a href="javascript:;" class="areaReturn" style="display: none;">返回</a>
+                    <table class="table table-bordered" id="province-list">
+                        <caption>省份列表</caption>
+                        <thead>
+                            <tr>
+                                <th>省份名称</th>
+                                <th>ID</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" id="city-list" style="display: none;">
+                        <caption>地级市列表</caption>
+                        <thead>
+                            <tr>
+                                <th>地级市名称</th>
+                                <th>ID</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" id="county-list" style="display: none;">
+                        <caption>县/区列表</caption>
+                        <thead>
+                            <tr>
+                                <th>县/区名称</th>
+                                <th>ID</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success add-address" data-toggle="modal"
+                        data-target="#myModal9">添加区域</button>
+                    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">区域添加</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="javascript:;" id="areaList-form1">
+                                        <div>区域名称：<input type="text" name="areaName"></div>
+                                        <div>区域级别：<input type="radio" name="8" value="1" checked>省份 <input type="radio"
+                                                name="8" value="2">地级市<input type="radio" name="8" value="3">县/区</div>
+                                        <div id="parentArea" style="display: none;">父级区域ID：<input type="text"
+                                                name="parentAreaId">
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary addAddress">确定添加</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class=" item">
+                    <h4>条件查询：</h4>
+                    <div class="col-md-12">图书名称：<input type="text" id="bookNameFind">
+                        <button type="button" class="btn btn-primary btn-sm find1">查找</button>
+                    </div>
+                    <div class="col-md-12">一级类别：<select name="" id="category1">
+                            <option value="">不选</option>
+
+                        </select>
+                        二级类别：<select name="" id="category2">
+                            <option value="">不选</option>
+
+                        </select>
+                        上下架状态：<select name="" id="status">
+                            <option value="">不选</option>
+                            <option value="true">上架</option>
+                            <option value="false">下架</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">创建时间范围： 开始:<input type="datetime-local" step="01" id="beginTime"
+                            style="margin:0 5px;">结束:<input type="datetime-local" step="01" id="endTime"
+                            style="margin:0 5px;"><button type="button" class="btn btn-primary btn-sm find2">查找</button>
+                    </div>
+
+
+
+                    <table class="table table-bordered table-condensed table-hover bookList">
+                        <a href="javascript:;" class="resReturn">返回</a>
+                        <caption>书籍列表</caption>
+                        <thead>
+                            <tr>
+                                <th>书籍记录ID</th>
+                                <th>书籍名称</th>
+                                <th>书籍类别</th>
+                                <th>书籍类别ID</th>
+                                <th>剩余库存</th>
+                                <th>总库存</th>
+                                <th>价格（元）</th>
+                                <th>出版社</th>
+                                <th>作者</th>
+                                <th>上下架状态</th>
+                                <th>SN码</th>
+                                <th>出版时间</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success bookAdd" data-toggle="modal"
+                        data-target="#myModal6">添加书籍</button>
+                    <div class="box">
+                        <div id="pagination1" class="fl col-md-offset-3 page2"></div>
+                    </div>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">书籍编辑</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="javascript:;" id="bookList-form1">
+                                        <div>类别ID：<input type="text" name="categoryId1"></div>
+                                        <div>书籍名称：<input type="text" name="bookName1"></div>
+                                        <div>书籍图片：<input type="text" name="bookIconUrl1"></div>
+                                        <div>出版时间：<input type="text" name="publishTime1"></div>
+                                        <div>出版社：<input type="text" name="press1"></div>
+                                        <div>作者：<input type="text" name="author1"></div>
+                                        <div>SN码：<input type="text" name="bookNo1"></div>
+                                        <div>价格（元）:<input type="text" name="currPrice1"></div>
+                                        <div>总库存:<input type="text" name="totalStock1"></div>
+                                        <div>剩余库存:<input type="text" name="remainStock1"></div>
+                                        <div>内容介绍：<textarea name="bookDetailImg1" id="" class="form-control" cols=""
+                                                rows=""></textarea></div>
+                                        <div>上下架状态：<input type="radio" name="1" value="true">上架 <input type="radio"
+                                                name="1" value="false">下架</div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary edit-book">提交更改</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">书籍添加</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="javascript:;" id="bookList-form2">
+                                        <div>书籍类别ID：<input type="text" name=""></div>
+                                        <div>书籍名称：<input type="text" name=""></div>
+                                        <div>书籍图片：<input type="text" name=""></div>
+                                        <div>出版时间：<input type="text" name=""></div>
+                                        <div>出版社：<input type="text" name=""></div>
+                                        <div>作者：<input type="text" name=""></div>
+                                        <div>SN码：<input type="text"></div>
+                                        <div>价格（元）:<input type="text" name="currPrice2"></div>
+                                        <div>总库存:<input type="text" name="totalStock2"></div>
+                                        <div>剩余库存:<input type="text" name="remainStock2"></div>
+                                        <div>内容介绍：<textarea name="" id="" cols="" rows=""
+                                                class="form-control"></textarea></div>
+                                        <div>上下架状态：<input type="radio" name="2" value="true">上架 <input type="radio"
+                                                name="2" value="false">下架</div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary book-add">确定添加</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
+                </div>
+                <div class="item">
+
+                    <table class="table table-bordered table-hover categoryList">
+                        <caption>图书类别列表</caption>
+                        <thead>
+                            <tr>
+                                <th>类别ID</th>
+                                <th>类别名称</th>
+                                <th>类别级别</th>
+                                <th>父类别名称</th>
+                                <th>父类别ID</th>
+                                <th>类别状态</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success category-btn3" data-toggle="modal"
+                        data-target="#myModal8">添加类别</button>
+                    <div class="box">
+                        <div id="pagination1" class="fl col-md-offset-3 page3"></div>
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">类别编辑</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="javascript:;" id="category-form1">
+                                        <div>类别名称：<input type="text" name="categoryName"></div>
+                                        <div>类别级别：<input type="text" name="categoryLevel"></div>
+                                        <div>父类别ID：<input type="text" name="parentCategoryId"></div>
+                                        <div>上下架状态：<input type="radio" name="value2" value="true">上架 <input type="radio"
+                                                name="value2" value="false">下架</div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary editCategory">提交更改</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">类别添加</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="#" id="category-form3">
+                                        <div>类别名称：<input type="text" name="categoryName3"></div>
+                                        <div>类别级别：<input type="text" name="categoryLevel3"></div>
+                                        <div>类别ID：<input type="text" name="categoryId3"></div>
+                                        <div class="parentCategoryId3">父类别ID：<input type="text"
+                                                name="parentCategoryId3"></div>
+                                        <div>上下架状态：<input type="radio" name="value3" value="true">上架 <input type="radio"
+                                                name="value3" value="false">下架</div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary category-add">确定添加</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h4>条件查询：</h4>
+                    <div class="col-md-12">
+                        账号：<input type="text" id="accountFind">
+                    </div>
+                    <div>订单号：<input type="text" id="orderNoFind"></div>
+                    <div>下单时间范围： 开始:<input type="datetime-local" step="01" id="orderBeginTime"
+                            style="margin:0 5px;">结束:<input type="datetime-local" step="01" id="orderEndTime"
+                            style="margin:0 5px;"> <button type="button"
+                            class="btn btn-primary btn-sm orderFind">查找</button>
+                    </div>
+
+                    <table class="table table-bordered table-condensed table-hover orderList">
+                        <a href="javascript:;" class="resReturn2">返回</a>
+                        <caption>订单列表</caption>
+                        <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>收件人</th>
+                                <th>收件地址</th>
+                                <th>联系电话</th>
+                                <th>书籍名称</th>
+                                <th>书籍ID</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>支付价格（元）</th>
+                                <th>下单时间</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="box">
+                        <div id="pagination1" class="fl col-md-offset-3 page4"></div>
+                    </div>
+                </div>
+                <!-- 修改密码 -->
+                <div class="item">
+                    <form action="#" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="oldMd5Pwd" class="col-md-2 control-label">旧密码</label>
+                            <div class="col-md-3">
+                                <input type="password" class="form-control" name="oldMd5Pwd" id="oldMd5Pwd"
+                                    placeholder="请输入旧密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newMd5Pwd" class="col-md-2 control-label">新密码</label>
+                            <div class="col-md-3">
+                                <input type="password" class="form-control" name="newMd5Pwd" id="newMd5Pwd"
+                                    placeholder="请输入新密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-danger">确定修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+
+<script src="js/admin.index.js"></script>
+
+</html>

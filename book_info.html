@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/book_info.css">
+    <script src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="#">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="#" id="car">我的购物车</a>
+    </header>
+
+    <span class="shouye_category"><a href="index.html">首页</a> <span> > </span> <span id="category2">小说</span><span> >
+        </span>
+        <span id="bkname">书名</span>
+    </span>
+    <div class="banner">
+        <div class="container-book_info clearfix">
+            <div class="info_img"><img src="" alt="">
+            </div>
+            <div class="container-detail">
+                <p class="title">鬼灭之刃</p>
+                <p class="author">余华 </p>
+                <div class="container-price">
+                    <p>价格：<span id="rmb">￥30</span></p>
+                    <div class="banner-num">
+                        <span style="font-size: 20px;">数量：</span>
+                        <button class="reduce">-</button>
+                        <input type="text" value="1">
+                        <button class="add">+</button>
+                    </div>
+                    <button id="add_car_btn">加入购物车</button>
+                    <button id="collect_btn">收藏</button>
+                    <p id="tip">温馨提示：支持七天无理由退货</p>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Tab栏 -->
+        <div class="tab">
+            <div class="tab_list">
+                <ul>
+                    <li class="current">图书内容介绍</li>
+                    <li>规格与包装</li>
+                    <li>售后与保障</li>
+
+                </ul>
+            </div>
+            <div class="tab_con">
+                <div class="item" style="display: block;">
+                    商品介绍模块内容
+                </div>
+                <div class="item">
+                    暂无
+                </div>
+                <div class="item">
+                    售后保障模块内容
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer><img src="images/footer.PNG" alt="" style="width: 100%;margin-top: 80px;"></footer>
+</body>
+<script>
+    $('#car').on('click', function () {
+        if (localStorage.getItem('token')) {
+            window.open('car.html');
+        } else {
+            window.location.href = 'login.html';
+        }
+    })
+    // 搜索
+    $('#form_search').submit(function () {
+
+        var params = $(this).serializeArray();
+        $.ajax({ type: 'get', url: 'http://localhost:9321/mall/book/open/search', data: { bookName: params[0].value, pageNum: '1', pageSize: '10' }, success: function (res) { console.log(res); } })
+
+
+
+    })
+
+    // 登录状态
+    function state() {
+        if (localStorage.getItem('userName')) {
+            $('.nav dl dt').text('Hi,' + localStorage.getItem('userName'));
+            $('#login_li').css('visibility', 'hidden');
+            $('.nav dl').css('visibility', 'visible');
+        } else {
+            $('#login_li').css('visibility', 'visible');
+            $('.nav dl').css('visibility', 'hidden');
+        }
+    }
+    state();
+    $('#signout').on('click', function () {
+        confirm('确定退出登录？');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('token');
+        location.reload();
+    })
+
+    $.ajax({
+        type: 'get',
+        url: 'http://localhost:9321/mall/book/open/bookDetail',
+        data: { bookId: localStorage.getItem('bookId') },
+        success: function (res) {
+            $('title').html(res.result.bookName);
+            $('#bkname').text(res.result.bookName);
+            $('#category2').text(res.result.categoryName);
+            $('.title').text(res.result.bookName);
+            $('.author').html(res.result.author + ' ' + '著');
+            $('#rmb').text('￥' + res.result.currPrice);
+            $('.info_img img').attr('src', res.result.bookIconUrl);
+            $('.tab_con').children('div:first').html(res.result.bookDetailImg);
+        }
+    })
+</script>
+<script src="js/index.js"></script>
+<script src="js/personal.js"></script>
+
+</html>

@@ -1,0 +1,34 @@
+body {
+    background-image: url(../images/admin.index.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-admin {
+    margin-top: 30px;
+}
+
+.manage {
+    margin-bottom: 40px;
+}
+
+.banner-btn1 {
+    margin-left: 15px;
+}
+
+.item {
+    display: none;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.resReturn,
+.resReturn2 {
+    display: none;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/car.css">
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="BootStrap/dist/css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="BootStrap/dist/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="#">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="#" id="car">我的购物车</a>
+
+
+
+    </header>
+    <div class="w title"><a href="index.html">首页</a> > 购物车</div>
+    <div class="c-container">
+        <div class="w">
+            <div class="cart-filter-bar">
+                <em>全部商品</em>
+            </div>
+            <!-- 购物车主要核心区域 -->
+            <div class="cart-warp">
+                <!-- 头部全选模块 -->
+                <div class="cart-thead">
+                    <div class="t-checkbox">
+                        <input type="checkbox" name="" id="" class="checkall"> 全选
+                    </div>
+                    <div class="t-goods">商品</div>
+                    <div class="t-price">单价</div>
+                    <div class="t-num">数量</div>
+                    <div class="t-sum">小计</div>
+                    <div class="t-action">操作</div>
+                </div>
+                <!-- 商品详细模块 -->
+                <div class="cart-item-list">
+
+                </div>
+
+                <!-- 结算模块 -->
+                <div class="cart-floatbar">
+                    <div class="select-all">
+                        <input type="checkbox" name="" id="" class="checkall">全选
+                    </div>
+                    <div class="operation">
+                        <a href="javascript:;" class="remove-batch"> 删除选中的商品</a>
+                        <a href="javascript:;" class="clear-all">清理购物车</a>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="amount-sum">已经选<em>1</em>件商品</div>
+                        <div class="price-sum">总价： <em>￥12.60</em></div>
+                        <button class="btn-area" data-toggle="modal" data-target="#myModal">去结算</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">确认订单</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <div id="priceSum">共需支付&nbsp;<em></em></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary pay" style="background-color:red">支付</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <footer><img src="images/footer.PNG" alt="" style="width: 100%;margin-top: 80px;"></footer>
+</body>
+
+<script src="js/comom.js"></script>
+<script src="js/index.js"></script>
+<script src="js/car.js"></script>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/personal.css">
+    <link rel="stylesheet" href="BootStrap/dist/css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="BootStrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/personal.js"></script>
+    <script src="js/jquery.md5.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="">
+        <div class="nav">
+            <ul>
+                <li id="login_li">你好，请<a href="login.html">登录</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <div class="container-dl">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd id="personal"><a href="#">个人中心</a></dd>
+                        <dd id="modify_pwd"><a href="#">修改密码</a></dd>
+                        <dd id="signout"><a href="javascript:;">退出登录</a></dd>
+                    </dl>
+                </div>
+            </ul>
+        </div>
+        <div class="container-search">
+            <form action="javascript:;" id="form_search"><input type="text" name="bookName" autocomplete="off">
+                <button type="submit" class="search-btn">搜索</button>
+            </form>
+        </div>
+        <a href="car.html" id="car">我的购物车</a>
+    </header>
+    <div class="shouye w"><a href="index.html">首页</a> <span> > </span> <span>个人中心</span></div>
+    <div class="container-tab w clearfix">
+        <ul class="tab_list">
+            <li class="current">个人信息</li>
+            <li>我的订单</li>
+            <li>我的收藏</li>
+            <li>修改密码</li>
+        </ul>
+        <div class="tab_con">
+            <div class="item basicInformation" style="display: block;">
+                <div>
+                    <h4>基本信息</h4>
+                </div>
+                <div class="clearfix">
+                    <div class="user-name">用户名：</div>
+                    <div class="userName">xigua6782</div>
+                </div>
+                <div class="clearfix">
+                    <div class="phone-number">绑定手机号：</div>
+                    <div class="phoneNumber">15089454987</div>
+                </div>
+                <div class="clearfix">
+                    <table class="table table-bordered addressList">
+                        <caption>收货地址</caption>
+                        <thead>
+                            <tr>
+                                <th>收货人</th>
+                                <th>联系电话</th>
+                                <th>所在地区</th>
+                                <th>详细地址</th>
+                                <th>操作</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="address"></div><a id="add_adress" style="color:#ff5000 ;">添加地址</a>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">添加收货地址</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div><span>收货人</span><input type="text" id="receiver"></div>
+                                <div style="margin-top:20px ;"><span>联系电话</span><input type="text" id="connectMobile">
+                                </div>
+                                <div style="margin-top:20px ;"><span>所在地区</span>
+                                    <select name="" id="province">
+                                        <option value="" id="">请选择省份</option>
+                                    </select>
+                                    <select name="" id="city">
+                                        <option value="">请选择城市</option>
+                                    </select>
+                                    <select name="" id="district">
+                                        <option value="">请选择县/区</option>
+                                    </select>
+                                </div>
+                                <div style="margin-top:20px ;"><span>详细地址</span><textarea name="" id="address" cols="20"
+                                        rows="10" style="width:300px ;height:50px;resize:none;"></textarea></div>
+                                <div style="margin-top:20px ;">设置为默认地址<input type="checkbox" value="true"
+                                        name="defaultFlag" id="defaultFlag">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="adressAdd"
+                                    style="background-color: #ff5000;">保存</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">编辑收货地址</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div><span>收货人</span><input type="text" id="receiver2"></div>
+                                <div style="margin-top:20px ;"><span>联系电话</span><input type="text" id="connectMobile2">
+                                </div>
+                                <div style="margin-top:20px ;"><span>所在地区</span>
+                                    <select name="" id="province2">
+                                        <option value="" id="">请选择省份</option>
+                                    </select>
+                                    <select name="" id="city2">
+                                        <option value="">请选择城市</option>
+                                    </select>
+                                    <select name="" id="district2">
+                                        <option value="">请选择县/区</option>
+                                    </select>
+                                </div>
+                                <div style="margin-top:20px ;"><span>详细地址</span><textarea name="" id="address2"
+                                        cols="20" rows="10" style="width:300px ;height:50px;resize:none;"></textarea>
+                                </div>
+                                <div style="margin-top:20px ;">设置为默认地址<input type="checkbox" value="true"
+                                        name="defaultFlag2" id="defaultFlag2">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="edit-address"
+                                    style="background-color: #ff5000;">提交更改</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    <h4>全部订单</h4>
+                </div>
+                <table class="table table-bordered order-list">
+                    <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>书籍名称</th>
+                            <th>数量</th>
+                            <th>单价(元)</th>
+                            <th>支付金额(元)</th>
+                            <th>收件人</th>
+                            <th>收件地址</th>
+                            <th>联系电话</th>
+                            <th>订单状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="item mycollect">
+                <ul></ul>
+            </div>
+            <div class="item">
+                <h4>修改密码</h4>
+                <form action="javascript:;" class="form-pwd">
+                    <div style="margin-bottom: 10px;">
+                        原密码：<input type="password" name="oldLoginPwd">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        新密码：<input type="password" name="newLoginPwd">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-xs">确认修改</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <footer><img src="images/footer.PNG" alt="" style="width: 100%;margin-top: 80px;"></footer>
+</body>
+<script src="js/comom.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $.ajax({
+        headers: { token: localStorage.getItem('token') },
+        type: 'get',
+        url: 'http://localhost:9321/mall/user/userInfo',
+        success: function (res) {
+            console.log(res);
+        }
+
+    })
+    // 我的收藏
+    function mycollect() {
+        $.ajax({
+            headers: { token: localStorage.getItem('token') },
+            type: 'get',
+            url: 'http://localhost:9321/mall/book/myCollects',
+            success: function (res) {
+                $.each(res.result.page.list, function (i, ele) {
+                    var bookimg = res.result.page.list[i].bookIconUrl;
+                    var boolname = res.result.page.list[i].bookName;
+                    var bookprice = res.result.page.list[i].currPrice;
+                    var press = res.result.page.list[i].press;
+                    var bookId = res.result.page.list[i].bookId;
+                    $('.mycollect ul').append('<li id="' + bookId + '"> <a href = "book_info.html" target="_blank"><div class ="goods-img"><img src = "' + bookimg + '" alt=""><div></a><div class="bookprice">￥' + bookprice + '</div><em><a href ="book_info.html" target="_blank">' + boolname + '</a></em> <div class="press">' + press + '</div> <span class = "cancel-collect">取消收藏</span> <span class = "iconfont icon-gouwuche add-car">加入购物车</span> </li>');
+                })
+            }
+        })
+    }
+    mycollect();
+    $('.mycollect ul').on('click', 'li', function () {
+        var list_id = $(this).attr('id');
+        localStorage.setItem('bookId', list_id);
+
+    })
+    // 取消收藏
+    $('.mycollect ul').on('click', '.cancel-collect', function () {
+        var bookid = $(this).parents('li').attr('id');
+        $.ajax({
+            headers: { token: localStorage.getItem('token') },
+            type: 'post',
+            url: 'http://localhost:9321/mall/book/collect',
+            data: { bookId: bookid }, success: function () {
+                $('.mycollect ul').empty();
+                mycollect();
+
+            }
+
+        })
+    })
+
+    // 添加购物车
+    $('.mycollect ul').on('click', '.add-car', function () {
+        var bookid = $(this).parents('li').attr('id');
+        localStorage.setItem('bookId', bookid);
+        $.ajax({
+            headers: { token: localStorage.getItem('token') },
+            type: 'post',
+            url: 'http://localhost:9321/mall/shoppingCart/add',
+            data: { bookId: localStorage.getItem('bookId'), bookNum: '1' },
+
+        })
+
+    })
+
+    // 修改密码
+    $('.form-pwd').submit(function () {
+        var data = $(this).serializeArray();
+        var oldLoginPwd = $.md5(data[0].value);
+        var newLoginPwd = $.md5(data[1].value);
+        $.ajax({
+            headers: { token: localStorage.getItem('token') },
+            type: 'post',
+            url: 'http://localhost:9321/mall/user/modifyLoginPwd',
+            data: { oldLoginPwd: oldLoginPwd, newLoginPwd: newLoginPwd },
+            success: function (res) {
+                if (res.code == '200') {
+                    confirm('修改密码成功！')
+                } else { confirm('原密码不正确！') }
+            }
+        })
+    })
+
+</script>
+<script src="js/comom.js"></script>
+
+</html>

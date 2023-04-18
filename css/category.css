@@ -1,0 +1,271 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    position: relative;
+    height: 160px;
+
+}
+.nav {
+    position: absolute;
+    left: 300px;
+    top: 40px;
+}
+.nav ul{
+    position: relative;
+    list-style: none;
+}
+.nav li{
+    float: left;
+    height: 40px;
+    color: gray;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+    border-right: orange;
+    margin-right: 50px;
+    
+}
+
+.container-dl{
+    position: absolute;
+    top: 8px;
+    left: 4px;
+   
+}
+
+.nav dd{
+    visibility:hidden;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    border: #c0c0c0 1px solid;
+    border-top: none;
+}
+.nav a{
+    text-decoration: none;
+    color: red;
+}
+
+.nav a:active{
+    color: blanchedalmond;
+    
+}
+.nav dd a{
+    color: gray;
+    font-size: 12px; 
+    line-height: 30px;
+}
+.nav dd:hover{
+    background-color: #fff8dc;
+}
+.nav dd a:hover{
+    text-decoration: underline;
+}
+.nav dt{
+    font-size: 16px;
+    
+}
+
+header img{
+    margin: 6px 0 0 50px;
+}
+input{
+    float: left;
+    width: 456px;
+    height: 36px;
+    border-width: 2px 0 2px 2px;
+    border-color:#DEB887;
+    border-style: solid;
+    outline: none;
+    padding-left: 6px;
+    color: #a9a9a9;
+}
+.search-btn{
+    float: left;
+    width: 80px;
+    height: 36px;
+    border: none;
+    background-color: #DEB887;
+    line-height: 1;
+    color:black;
+    font-size: 16px;
+    cursor: pointer;
+}
+.search-btn:active{
+    color:white;
+}
+
+.container-search{
+    position: absolute;
+    top: 110px;
+    left: 380px;
+    width: 536px;
+    height: 36px;
+}
+#car:active{
+    color:blanchedalmond;
+}
+#car{
+    position: absolute;
+    width: 100px;
+    height: 36px;
+    top: 110px;
+    left: 1100px;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    background-color:white;
+    color: red;
+    border:#DFDFDF 1px solid;
+    cursor: pointer;
+    
+}
+
+.shouye,#category2{
+    font-weight: 200;
+    text-decoration:none;
+    color:gray;
+    font-size: 16px;
+}
+.shouye:hover{
+    text-decoration: underline;
+}
+
+.container-goods{
+    width: 1100px;
+    margin: 50px auto;
+
+}
+.container-goods ul{
+    margin-top: 12px;
+    display: flex;
+    width: 1100px;
+    height: 1000px;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: space-between;
+    align-content: space-between;
+}
+.container-goods li{
+
+width: 230px;
+height: 330px;
+
+}
+.container-goods li:hover{
+    border: #c0c0c0 1px solid;
+}
+
+.goods-img{
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    
+}
+.goods-img img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.bookprice{
+    font-size: 20px;
+    color: red;
+    
+}
+
+
+.container-goods span em{
+      font-style: normal;
+      font-weight: 200;
+  }
+
+  .container-goods li em{
+      display:-webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      width: 200px;
+      font-style: normal;
+      font-size: 10px;
+      font-weight: 400;
+      overflow: hidden;
+      margin: 8px auto;
+  }
+  .container-goods li em a{
+      text-decoration: none;
+      color:#666;
+  }
+  .container-goods li em a:hover{
+      text-decoration: underline;
+  }
+
+.press{
+    font-size: 10px;
+    color: #999999;
+    margin-bottom: 6px;
+}
+.container-goods li span{
+    color: red;
+    font-size: 14px;
+    cursor: pointer;
+}
+.collect{
+    color: gray;
+}
+
+.add-car{
+    margin-left: 65px;
+}
+/*  */
+@font-face {
+    font-family: "iconfont"; /* Project id 3225627 */
+    src: url('//at.alicdn.com/t/font_3225627_rmckdaf9iwa.woff2?t=1646617286414') format('woff2'),
+         url('//at.alicdn.com/t/font_3225627_rmckdaf9iwa.woff?t=1646617286414') format('woff'),
+         url('//at.alicdn.com/t/font_3225627_rmckdaf9iwa.ttf?t=1646617286414') format('truetype');
+  }
+  
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-xiai:before {
+    content: "\e600";
+  }
+  
+  .icon-gouwuche:before {
+    content: "\e73d";
+  }
+  
+  .icon-xiangyoujiantou:before {
+    content: "\e65f";
+  }
+
+  /* 提示 */
+.container-tip{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -60px;
+    font-size: 20px;
+    z-index: 5;
+    color:black;
+    white-space: nowrap;
+    line-height: 50px;
+    text-align: center;
+    width: 120px;
+    height: 50px;
+    background-color:wheat;
+    border-radius: 10px;
+    display: none;
+    }
+ 

@@ -1,0 +1,159 @@
+.banner{
+    width: 1100px;
+    margin: 30px auto;
+    
+}
+
+.clearfix:after{
+    content:"";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix{
+    *zoom:1;
+}
+
+.shouye_category{
+    display: block;
+    background-color:#f2f2f2;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 81px;
+    margin-top: 30px;
+}
+.shouye_category a,.shouye_category span{
+    float: left;
+    margin-right: 5px;
+}
+.shouye_category a{
+    text-decoration:none;
+    color:gray;
+}
+.shouye_category a:hover{
+    text-decoration: underline;
+}
+
+#bkname{
+    width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_img{
+    float: left;
+    width: 340px;
+    height: 380px;
+   
+
+}
+.info_img img{
+    width: 100%;
+    height: 100%;
+}
+
+.container-detail{
+    float: left;
+    margin-left: 60px;
+    width: 700px;
+    
+   
+}
+
+.title{
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #ff6600;
+
+}
+.author{
+    font-size: 28px;
+    color:#ccc;
+    margin-bottom: 20px;
+}
+
+.container-price p {
+font-size: 25px;
+color: #6c6c6c;
+}
+#tip{
+    font-size: 12px;
+    color: red;
+    margin-top: 20px;
+}
+.container-price p span{
+    font-size: 35px;
+    color:red ;
+    
+}
+.banner-num{
+    margin-top: 40px;
+}
+.banner-num input{
+width: 35px;
+height: 30px;
+text-align: center;
+border: #c0c0c0 1px solid;
+}
+.banner-num button{
+    width: 30px;
+    height: 30px;
+    background-color:#f1f1f1;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+
+}
+.banner-num button:active{
+    color: white;
+}
+#add_car_btn,#collect_btn{
+    width: 210px;
+    height: 60px;
+    margin-top: 30px;
+    font-size: 26px;
+    color: white;
+    border: none;
+}
+#add_car_btn{
+    background-color:orange;
+}
+#collect_btn{
+    background-color: red;
+    margin-left: 80px;
+}
+
+.tab{
+    margin-top: 18px;
+}
+li{
+   list-style-type: none;
+}
+.tab_list {
+    height: 39px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    background-color: #f1f1f1;
+}
+.tab_list li{
+    float: left;
+    height: 39px;
+    line-height: 39px;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.tab_list .current {
+    background-color: #c81623;
+    color: #fff;
+}
+
+.item {
+    display: none;
+    margin-top: 12px;
+    
+}
